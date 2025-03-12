@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-joao-service
+  namespace: test  # Define o namespace correto
+spec:
+  selector:
+    app: ms-joao
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP  # Pode ser LoadBalancer ou NodePort se precisar expor externament
+

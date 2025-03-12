@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-joao
+  namespace: test
+  labels:
+    app: ms-joao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-joao
+  template:
+    metadata:
+      labels:
+        app: ms-joao
+    spec:
+      containers:
+        - name: ms-joao
+          image: joaoalbertino/ms-joao:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: configmap-ms  # Referência ao ConfigMap
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
